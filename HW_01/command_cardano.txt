@@ -1,0 +1,22 @@
+* Nội dung thực hiện
+Sử dụng Plutus viết 1 Smart contract , so sánh giá trị số nguyên trong datum và redeemer , nếu chúng bằng nhau , cho phép chi tiêu UTxO.
+
+* Các bước tương tác với smart contract
+- Wallet Hieu : Lock 10 ADA vào smart contract với datum = 45
+- Wallet Son : Thực hiện unlock UTxO bị khóa, ADA sau khi unlock sẽ chuyển về cho Hieu 3 ADA, phần còn lại sẽ về ví của Son. Với 3 ngữ cảnh sau :
+
++ TH1: gửi kèm datum = 53 , redeemer = 53
++ TH2: gửi kèm datum = 53, redeemer = 45
++ TH3: gửi kèm datum = 45 , redeemer = 45
+
+II. Các bước thực hiện
+1. Tạo các file datum.json và redeemer.json
+
+echo '{"int":45}' > datum_45.json
+echo '{"int":53}' > datum_53.json
+echo '{"int":45}' > redeemer_45.json
+echo '{"int":53}' > redeemer_53.json
+
+2. Thực hiện wallet Hieu lock 10 Ada vào smart contract
+
+
