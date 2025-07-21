@@ -12,14 +12,82 @@ Sử dụng Plutus viết 1 Smart contract , so sánh giá trị số nguyên tr
 II. Các bước thực hiện
 1. Tạo các file datum.json và redeemer.json
 
-echo '{"int":45}' > datum_45.json
-echo '{"int":53}' > datum_53.json
-echo '{"int":45}' > redeemer_45.json
-echo '{"int":53}' > redeemer_53.json
+echo '{"int": 45}' > datum_45.json
+echo '{"int": 53}' > datum_53.json
+echo '{"int": 45}' > redeemer_45.json
+echo '{"int": 53}' > redeemer_53.json
 
 2. Thực hiện wallet Hieu lock 10 Ada vào smart contract
 
-# Kiem tra so du ADA moi account
-cardano-cli query utxo --testnet-magic 2 --address ${cat hieu.addr}
+# Gen dia chi cua smart contract
+
+cardano-cli address build \
+  --payment-script-file datumEqualRedeemer.plutus \
+  --testnet-magic 2 \
+  --out-file ./gens/datumEqualRedeemer.addr
+
+# Kiem tra so du ADA cua hieu wallet
+cardano-cli query utxo --testnet-magic 2 --address $(cat hieu.addr)
+
+# Xay dung giao dich, gui 10 ADA vao smart contract
+cardano-cli conway transaction build \
+  --testnet-magic 2 \
+  --tx-in 2e85ec21af1c18a88d45c19c15570bf78b38713ceb46669a76c7591ec9457c15#0 \
+  --tx-in 359424c8e41afffa10f8cb799f2d8f3d1a5d025b1e9f805af3065269a27bc7d1#0 \
+  --tx-in c6ff640a4e7d2dac48728c69aa5382f9f4775b694971b30a3e2fc24e5e173430#0 \
+  --tx-out $(cat ./gens/datumEqualRedeemer.addr)+10000333 \
+  --tx-out-datum-embed-file datum_45.json \
+  --change-address $(cat hieu.addr) \
+  --out-file ./gens/lock.tx
+
+# Ký giao dich
+cardano-cli conway transaction sign \
+  --tx-body-file ./gens/lock.tx \
+  --signing-key-file ./keys/hieu.skey \
+  --out-file ./gens/lock.signed
+
+# submit giao dich
+cardano-cli conway transaction submit \
+  --tx-file ./gens/lock.signed \
+  --testnet-magic 2
+
+3. Son wallet thực hiện Unlock giao dịch
+# Kiem tra UTxO bi khoa tren smart contract
+cardano-cli query utxo --testnet-magic 2 --address $(cat ./gens/datumEqualRedeemer.addr)
+
+# Kiem tra so du ADA cua Son
+cardano-cli query utxo --testnet-magic 2 --address $(cat son.addr)
+
+# Xay dung giao dich, TH1 : gui voi datum = 53 , redeemer = 53
+cardano-cli conway transaction build \
+  --testnet-magic 2 \
+  --tx-in 23d88b8a3ebfb6f315b00e0e25cd33ac0cdfdaf54d7688a91d2014d72b8fb33b#0 \
+  --tx-in-script-file datumEqualRedeemer.plutus \
+  --tx-in-datum-file datum_45.json \
+  --tx-in-redeemer-file redeemer_45.json \
+  --tx-in-collateral cb355ba848228631809dc13985bde3f52f910674e2c0f6f3de22d65806d401e5#1 \
+  --tx-out $(cat hieu.addr)+3000000 \
+  --change-address $(cat son.addr) \
+  --out-file ./gens/unlock.tx
+
+# ky giao dich
+cardano-cli conway transaction sign \
+  --tx-body-file ./gens/unlock.tx \
+  --signing-key-file ./keys/son.skey \
+  --testnet-magic 2 \
+  --out-file ./gens/unlock.signed
+
+# submmit giao dich
+cardano-cli conway transaction submit \
+  --tx-file ./gens/unlock.signed \
+  --testnet-magic 2
+
+# Thực hiện tương tự cho 
++ TH2: datum = 45 , redeemer = 53
++ TH3: datum = 45, redeemer = 45
+
+
+
+
 
 
