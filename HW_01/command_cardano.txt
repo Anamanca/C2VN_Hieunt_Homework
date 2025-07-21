@@ -19,4 +19,7 @@ echo '{"int":53}' > redeemer_53.json
 
 2. Thực hiện wallet Hieu lock 10 Ada vào smart contract
 
+# Kiem tra so du ADA moi account
+cardano-cli query utxo --testnet-magic 2 --address ${cat hieu.addr}
+
 
