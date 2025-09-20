@@ -32,45 +32,13 @@ const wallet = new MeshWallet({
 
 // const balance = await wallet.getBalance();
 // console.log("Balance: ", balance);
-
-// //--------------------------- Xay dung giao dich chuyen 1,5 ADA den dia chi khac ------------
-// //
-// // đau tien lay UTxOs va dia chi thay doi tu vi
-// const utxos = await wallet.getUtxos();
-// const changeAddress = await wallet.getChangeAddress();
-// const amountToSend = 1500000; // 1.5 ADA in lovelace
-// console.log("Send Address: ", changeAddress);
-// console.log("Amount: ", amountToSend);
-
-// // dia chi nguoi nhan
-// const recipientAddress = 'addr_test1qzhc49ugvgy8ecn9yc5fqgf6ul93p5zax064zjhelzeu0fmpdncxll30wjh4dlws5t5l9tcrhzj62hdrr79ryxw3hyqqzfgrhx';
-// console.log("Recipient Address: ", recipientAddress);
-
-// // khoi tao txBuilder
-// const txBuilder = new MeshTxBuilder({
-//   fetcher: provider, // su dung BlockfrostProvider de lay du lieu blockchain
-//   submitter: provider, // su dung BlockfrostProvider de gui giao dich
-//   verbose: true,
-// });
-
-// const unsignedTx = await txBuilder
-//   .txOut(recipientAddress, [{ unit: "lovelace", quantity: amountToSend.toString() }]) // dia chi nguoi nhan va so tien gui
-//   .changeAddress(changeAddress)
-//   .selectUtxosFrom(utxos)
-//   .complete();
-
-// const signedTx = await wallet.signTx(unsignedTx);
-// const txHash = await wallet.submitTx(signedTx);
-
-// console.log("TxHash: ", txHash);
-
 //
 //--------------------------- Xay dung giao dich mint 1 NFT ------------
 //
 // Địa chỉ người nhận token
-//const recipientAddress = 'addr_test1qpuexzns2ze8g5csu30mnnk6gf2vx3kpwz2vcgvjsv7q3dr4mvw6eahqha5vj295mm0ugphljpesxaszfcff5hq9w63qrh0623';
+const recipientAddress = 'addr_test1qpuexzns2ze8g5csu30mnnk6gf2vx3kpwz2vcgvjsv7q3dr4mvw6eahqha5vj295mm0ugphljpesxaszfcff5hq9w63qrh0623';
 
-const recipientAddress = 'addr_test1qzhc49ugvgy8ecn9yc5fqgf6ul93p5zax064zjhelzeu0fmpdncxll30wjh4dlws5t5l9tcrhzj62hdrr79ryxw3hyqqzfgrhx';
+//const recipientAddress = 'addr_test1qzhc49ugvgy8ecn9yc5fqgf6ul93p5zax064zjhelzeu0fmpdncxll30wjh4dlws5t5l9tcrhzj62hdrr79ryxw3hyqqzfgrhx';
 
 // Lấy địa chỉ người gửi
 const walletAddress = await wallet.getChangeAddress();

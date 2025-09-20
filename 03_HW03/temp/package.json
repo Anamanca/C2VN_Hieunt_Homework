@@ -1,0 +1,22 @@
+{
+  "name": "03_hw03",
+  "version": "1.0.0",
+  "description": "Assignment 3 for C2VN course",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start01": "npm run build && node dist/01_Mint_token.js",
+    "start02": "npm run build && node dist/02_Mint_NFT_CIP_68.js",
+    "dev": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "@meshsdk/common": "^1.9.0-beta.74",
+    "@meshsdk/core": "^1.0.0"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  }
+}
