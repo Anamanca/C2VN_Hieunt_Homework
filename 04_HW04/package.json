@@ -1,0 +1,22 @@
+{
+  "name": "lucid-evolution-demo",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "scripts": {
+    "start": "ts-node --require dotenv/config",
+    "test": "vitest",
+    "test:emulator": "vitest demo-emulator.ts",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@lucid-evolution/lucid": "^0.4.29",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.0.0",
+    "typescript": "^5.0.0",
+    "fast-check": "^3.1.1",
+    "vitest": "^3.2.4"
+  }
+}
