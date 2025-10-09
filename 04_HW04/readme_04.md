@@ -1,17 +1,20 @@
 # Các bước khởi chạy
 
 ## B1: Cài đặt các configure cần thiết từ file package.json
-...
+
+```
 npm install
-...
+```
 
 ## B2: Chạy file test
-...
+
+```
 npm run test:emulator
-...
+```
 
 # Kết quả:
-...
+
+```
  DEV  v3.2.4 /home/hieunt/01_Project/01_C2VN/02_BTVN_02/C2VN_Hieunt_Homework/04_HW04
 
 stdout | 01_demo-emulator.ts > Property test: Pay to address with random amounts > should successfully send random amounts
@@ -261,4 +264,4 @@ Transaction hash: 10d47280def5d21461740862a78f71d65b8e808462e00a987b7fcc09b1bb4d
 
  PASS  Waiting for file changes...
        press h to show help, press q to quit
-...
+```
